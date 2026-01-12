@@ -1,0 +1,19 @@
+Analyze these top {{ top_n }} YouTube video titles (by 28-day views):
+
+{% for item in titles %}
+{{ item.title }} | {{ "{:,}".format(item.views) }} views
+{% endfor %}
+
+Provide a concise analysis covering:
+
+1. STRUCTURAL PATTERNS: Common formats (questions, how-tos, lists, etc.)
+
+2. KEY WORDS & PHRASES: Most impactful words/phrases used
+
+3. PSYCHOLOGICAL HOOKS: What makes these clickable?
+
+4. LENGTH: Optimal character/word count
+
+5. TOP 5 RECOMMENDATIONS: Actionable tips for creating high-performing titles
+
+Be specific and actionable. Focus on patterns that directly drive views.

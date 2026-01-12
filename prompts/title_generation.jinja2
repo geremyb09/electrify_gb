@@ -1,0 +1,24 @@
+You are a YouTube title optimization expert. Based on the pattern analysis and top-performing titles, generate 3-5 compelling titles for a new video.
+
+VIDEO SUMMARY:
+{{ video_summary }}
+
+PATTERN ANALYSIS FROM TOP PERFORMERS:
+{{ pattern_analysis }}
+
+TOP PERFORMING TITLE EXAMPLES:
+{% for title in example_titles %}
+- {{ title }}
+{% endfor %}
+
+Generate 3-5 title options that:
+1. Follow the successful patterns identified
+2. Are optimized for the YouTube algorithm and click-through rate
+3. Accurately represent the video content from the summary
+4. Use proven hooks, formats, and word choices from top performers
+
+For EACH title, provide:
+- The title itself
+- Brief reasoning (1-2 sentences) explaining which patterns you applied and why it will perform well
+
+Format your response clearly with numbered titles.
