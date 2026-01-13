@@ -51,7 +51,7 @@
 To install and setup local environment run the following command:
 
 ```
-chmod +x install_uv_and_sync.sh
+chmod +x ./scripts/install_uv_and_sync.sh
 ./scripts/install_and_activate_uv.sh
 ```
 
@@ -66,8 +66,8 @@ ANTHROPIC_API_KEY=your-api-key-here
 To deploy the FastAPI endpoint run the following command:
 
 ```
-chmod +x run_fastapi_endpoint.sh
-./run_fastapi_endpoint.sh
+chmod +x ./scripts/run_fastapi_endpoint.sh
+./scripts//run_fastapi_endpoint.sh
 ```
 
 The FastAPI endpoint uses a request API with the following inputs:
