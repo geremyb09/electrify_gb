@@ -51,7 +51,7 @@
 To install and setup local environment run the following command:
 
 ```
-chmod +x ./scripts/install_uv_and_sync.sh
+chmod +x ./scripts/install_and_activate_uv.sh
 ./scripts/install_and_activate_uv.sh
 ```
 
