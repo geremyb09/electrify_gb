@@ -28,11 +28,12 @@ async def lifespan(app: FastAPI):
     # Shutdown (cleanup if needed)
     logger.info("Shutting down...")
 
+
 app = FastAPI(
     title="YouTube Title Optimizer API",
     description="Generate optimized YouTube video titles",
     version="1.0.0",
-    lifespan=lifespan
+    lifespan=lifespan,
 )
 
 
@@ -50,9 +51,11 @@ class TitleResponse(BaseModel):
     generated_titles: str
     metadata: dict
 
+
 @app.get("/")
 async def root():
     return {"message": "YouTube Title Optimizer API", "status": "healthy"}
+
 
 @app.get("/health")
 async def health():
@@ -69,7 +72,7 @@ async def generate_titles(request: TitleRequest):
                 messages=[HumanMessage(content="Generate titles")],
                 channel_id=request.channel_id,
                 top_n=request.top_n,
-                new_video_summary=request.summary
+                new_video_summary=request.summary,
             )
         )
 
@@ -92,8 +95,8 @@ async def generate_titles(request: TitleRequest):
             metadata={
                 "top_n": request.top_n,
                 "total_videos": len(result["raw_data"]) if result["raw_data"] is not None else 0,
-                "avg_views": int(result["top_performers"]['views_in_period'].mean())
-            }
+                "avg_views": int(result["top_performers"]["views_in_period"].mean()),
+            },
         )
 
     except Exception as e:

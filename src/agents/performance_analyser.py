@@ -18,11 +18,11 @@ def identify_top_performers_node(state: AgentState) -> AgentState:
         return add_message_to_state(state, "No data available to analyze.")
 
     # Get top N performers
-    df_top = state.raw_data.nlargest(state.top_n, 'views_in_period')
+    df_top = state.raw_data.nlargest(state.top_n, "views_in_period")
 
     # Calculate statistics
-    total_views = df_top['views_in_period'].sum()
-    avg_views = df_top['views_in_period'].mean()
+    total_views = df_top["views_in_period"].sum()
+    avg_views = df_top["views_in_period"].mean()
     csv_text = df_top.to_string(index=False)
 
     message = (
@@ -38,5 +38,5 @@ def identify_top_performers_node(state: AgentState) -> AgentState:
         filtered_data=csv_text,
         channel_id=state.channel_id,
         top_n=state.top_n,
-        new_video_summary=state.new_video_summary
+        new_video_summary=state.new_video_summary,
     )

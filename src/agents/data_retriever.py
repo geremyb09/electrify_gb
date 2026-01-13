@@ -21,7 +21,7 @@ def load_channel_data_node(state: AgentState) -> AgentState:
 
         # Filter by channel_id and select relevant columns
         df_filtered = df[df["channel_id"] == state.channel_id][
-            ['channel_id', 'video_id', 'title', 'summary', 'views_in_period']
+            ["channel_id", "video_id", "title", "summary", "views_in_period"]
         ]
 
         # Check if channel exists
@@ -35,7 +35,7 @@ def load_channel_data_node(state: AgentState) -> AgentState:
             raw_data=df_filtered,
             channel_id=state.channel_id,
             top_n=state.top_n,
-            new_video_summary=state.new_video_summary
+            new_video_summary=state.new_video_summary,
         )
 
     except FileNotFoundError:

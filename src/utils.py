@@ -10,7 +10,7 @@ from config import (
     ANTHROPIC_TIMEOUT,
     MAX_RETRIES,
     RETRY_DELAY,
-    DEFAULT_MAX_TOKENS
+    DEFAULT_MAX_TOKENS,
 )
 from src.state import AgentState
 
@@ -31,12 +31,12 @@ def get_anthropic_client(timeout: float = ANTHROPIC_TIMEOUT) -> Optional[Anthrop
 
 
 def call_claude_with_retry(
-        client: Anthropic,
-        prompt: str,
-        max_retries: int = MAX_RETRIES,
-        max_tokens: int = DEFAULT_MAX_TOKENS,
-        temperature: float = 0.7,
-        operation_name: str = "API call"
+    client: Anthropic,
+    prompt: str,
+    max_retries: int = MAX_RETRIES,
+    max_tokens: int = DEFAULT_MAX_TOKENS,
+    temperature: float = 0.7,
+    operation_name: str = "API call",
 ) -> Tuple[str, bool]:
     """
     Call Claude API with exponential backoff retry logic.
@@ -62,7 +62,7 @@ def call_claude_with_retry(
                 model=ANTHROPIC_MODEL,
                 max_tokens=max_tokens,
                 temperature=temperature,
-                messages=[{"role": "user", "content": prompt}]
+                messages=[{"role": "user", "content": prompt}],
             )
 
             response_text = message.content[0].text
@@ -73,14 +73,13 @@ def call_claude_with_retry(
             error_type = type(e).__name__
 
             if attempt < max_retries - 1:
-                wait_time = retry_delay * (2 ** attempt)
+                wait_time = retry_delay * (2**attempt)
                 print(f"Attempt {attempt + 1} failed: {error_type}")
                 print(f"Retrying in {wait_time} seconds...")
                 time.sleep(wait_time)
             else:
                 error_msg = (
-                    f"Error after {max_retries} attempts: {error_type}\n\n"
-                    f"Details: {str(e)}\n\n"
+                    f"Error after {max_retries} attempts: {error_type}\n\n" f"Details: {str(e)}\n\n"
                 )
                 return error_msg, False
 
@@ -107,7 +106,7 @@ def add_message_to_state(state: AgentState, content: str) -> AgentState:
         generated_titles=state.generated_titles,
         channel_id=state.channel_id,
         top_n=state.top_n,
-        new_video_summary=state.new_video_summary
+        new_video_summary=state.new_video_summary,
     )
 
 
@@ -123,10 +122,7 @@ def format_titles_with_views(df: pd.DataFrame) -> List[dict]:
     """
     titles = []
     for idx, row in df.iterrows():
-        titles.append({
-            'title': row['title'],
-            'views': row['views_in_period']
-        })
+        titles.append({"title": row["title"], "views": row["views_in_period"]})
     return titles
 
 
@@ -141,4 +137,4 @@ def get_example_titles(df: pd.DataFrame, n: int = 5) -> List[str]:
     Returns:
         List of title strings
     """
-    return [row['title'] for _, row in df.head(n).iterrows()]
+    return [row["title"] for _, row in df.head(n).iterrows()]

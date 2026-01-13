@@ -6,6 +6,7 @@ from langchain_core.messages import BaseMessage
 
 class AgentState(BaseModel):
     """State object passed between agents in the graph"""
+
     messages: List[BaseMessage] = Field(default_factory=list)
     raw_data: Optional[pd.DataFrame] = None
     top_performers: Optional[pd.DataFrame] = None

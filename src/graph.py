@@ -6,7 +6,7 @@ from src.agents import (
     identify_top_performers_node,
     extract_title_patterns_with_llm_node,
     generate_titles_node,
-    respond_node
+    respond_node,
 )
 
 

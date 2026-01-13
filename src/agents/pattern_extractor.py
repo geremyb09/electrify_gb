@@ -6,7 +6,7 @@ from src.utils import (
     get_anthropic_client,
     call_claude_with_retry,
     add_message_to_state,
-    format_titles_with_views
+    format_titles_with_views,
 )
 from src.prompt_manager import prompt_manager
 
@@ -38,18 +38,14 @@ def extract_title_patterns_with_llm_node(state: AgentState) -> AgentState:
     titles_data = format_titles_with_views(state.top_performers)
 
     # Render prompt using Jinja2 template
-    prompt = prompt_manager.render(
-        "pattern_analysis.jinja2",
-        top_n=state.top_n,
-        titles=titles_data
-    )
+    prompt = prompt_manager.render("pattern_analysis.jinja2", top_n=state.top_n, titles=titles_data)
 
     # Call Claude API with retry logic
     pattern_analysis, success = call_claude_with_retry(
         client=client,
         prompt=prompt,
         temperature=PATTERN_ANALYSIS_TEMPERATURE,
-        operation_name="Pattern extraction"
+        operation_name="Pattern extraction",
     )
 
     if success:
@@ -66,5 +62,5 @@ def extract_title_patterns_with_llm_node(state: AgentState) -> AgentState:
         title_patterns=pattern_analysis,
         channel_id=state.channel_id,
         top_n=state.top_n,
-        new_video_summary=state.new_video_summary
+        new_video_summary=state.new_video_summary,
     )

@@ -6,7 +6,7 @@ from src.utils import (
     get_anthropic_client,
     call_claude_with_retry,
     add_message_to_state,
-    get_example_titles
+    get_example_titles,
 )
 from src.prompt_manager import prompt_manager
 
@@ -29,8 +29,7 @@ def generate_titles_node(state: AgentState) -> AgentState:
     client = get_anthropic_client()
     if not client or not state.title_patterns:
         return add_message_to_state(
-            state,
-            "Skipping title generation (missing API key or patterns)"
+            state, "Skipping title generation (missing API key or patterns)"
         )
 
     # Prepare example titles
@@ -41,7 +40,7 @@ def generate_titles_node(state: AgentState) -> AgentState:
         "title_generation.jinja2",
         video_summary=state.new_video_summary,
         pattern_analysis=state.title_patterns,
-        example_titles=example_titles
+        example_titles=example_titles,
     )
 
     # Call Claude API with retry logic
@@ -49,7 +48,7 @@ def generate_titles_node(state: AgentState) -> AgentState:
         client=client,
         prompt=prompt,
         temperature=TITLE_GENERATION_TEMPERATURE,
-        operation_name="Title generation"
+        operation_name="Title generation",
     )
 
     if success:
@@ -67,5 +66,5 @@ def generate_titles_node(state: AgentState) -> AgentState:
         generated_titles=generated_titles,
         channel_id=state.channel_id,
         top_n=state.top_n,
-        new_video_summary=state.new_video_summary
+        new_video_summary=state.new_video_summary,
     )

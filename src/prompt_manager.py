@@ -19,7 +19,7 @@ class PromptManager:
             loader=FileSystemLoader(templates_dir),
             autoescape=select_autoescape(),
             trim_blocks=True,
-            lstrip_blocks=True
+            lstrip_blocks=True,
         )
 
     def render(self, template_name: str, **kwargs) -> str:
@@ -35,5 +35,6 @@ class PromptManager:
         """
         template = self.env.get_template(template_name)
         return template.render(**kwargs)
+
 
 prompt_manager = PromptManager()
