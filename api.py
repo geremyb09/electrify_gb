@@ -1,4 +1,3 @@
-"""FastAPI application for YouTube Title Optimizer"""
 from fastapi import FastAPI, HTTPException
 from pydantic import BaseModel, Field
 from typing import Optional
